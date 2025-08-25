@@ -1,10 +1,20 @@
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { AuthProvider } from "./context/AuthContext";
+
 function App() {
   return (
-    <>
-      <div className="flex items-center justify-center min-h-screen bg-red-500">
-        <h1 className="text-3xl font-bold">Hello World</h1>
-      </div>
-    </>
+    <AuthProvider>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 

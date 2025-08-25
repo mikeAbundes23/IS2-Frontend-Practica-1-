@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
     setProfile(null);
     localStorage.removeItem("authTokens");
     localStorage.removeItem("profile");
-    navigate("/");
+    navigate("/login");
   };
 
   let updateToken = async () => {
