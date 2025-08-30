@@ -9,7 +9,7 @@ export const useApi = () => {
   // Aquí creamos una instancia de axios con los headers de autenticación
   // para las peticiones que requieren autenticación.
   const apiAuth = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/usuarios/",
+    baseURL: "http://127.0.0.1:8000/api/",
     headers: {
       Authorization: `Bearer ${authTokens?.access}`,
     },
@@ -23,5 +23,7 @@ export const useApi = () => {
 
   return {
     createUser: (user) => api.post("/user/create/", user),
+    getUserTasks: () => apiAuth.get("/user/tasks/my-tasks/"),
+    createTask: (task) => apiAuth.post("/tasks/", task),
   };
 };

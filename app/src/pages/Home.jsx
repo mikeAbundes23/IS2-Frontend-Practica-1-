@@ -1,38 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useApi } from "../api/useApi";
 
 export default function Home() {
-  // En el futuro aquí vas a conectar con tu backend y mostrar tareas
+  const { getUserTasks, createTask } = useApi();
   const [isCreating, setIsCreating] = useState(false);
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Estudiar Django",
-      description:
-        "Aprender Django para hacer el backend de mi practica de ingenieria de software.",
-      status: false,
-    },
-    {
-      id: 2,
-      title: "Hacer frontend con React",
-      description:
-        "Implementar el frontend de mi practica de ingenieria de software usando React JS",
-      status: true,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    console.log("Fetching tasks...");
+    const fetchTasks = async () => {
+      const response = await getUserTasks();
+      setTasks(response.data);
+      console.log(response.data);
+    };
+    fetchTasks();
+  }, []);
 
   function AddTaskForm() {
     const { register, handleSubmit } = useForm();
     const onSubmit = async (data) => {
-      setTasks([
-        ...tasks,
-        {
-          id: tasks.length,
-          title: data.title,
-          description: data.description,
-          status: false,
-        },
-      ]);
+      console.log("Task created:", data);
+      await createTask(data);
+      setTasks([...tasks, data]);
+
       setIsCreating(false);
     };
     return (
