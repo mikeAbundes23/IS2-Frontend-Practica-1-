@@ -7,10 +7,9 @@ export default function Navbar() {
 
   return (
     <nav className="bg-blue-600 text-white px-6 py-3 flex justify-between items-center">
-      <h1 className="font-bold text-lg">Mis Tareas</h1>
+      <h1 className="text-3xl font-bold text-lg">Taskify</h1>
 
       {!user ? (
-        // 🔹 Cuando NO hay usuario
         <div className="flex gap-4">
           <Link to="/login" className="hover:underline">
             Login
@@ -20,7 +19,6 @@ export default function Navbar() {
           </Link>
         </div>
       ) : (
-        // 🔹 Cuando SÍ hay usuario
         <div className="flex items-center gap-4">
           <button
             onClick={logoutUser}
