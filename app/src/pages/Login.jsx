@@ -1,8 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 export default function Login() {
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
