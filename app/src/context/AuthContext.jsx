@@ -7,6 +7,10 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
+  // Obtener la URL base de la API desde las variables de entorno
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api/";
+
   let [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
@@ -30,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   let loginUser = async (e) => {
     e.preventDefault();
-    let response = await fetch("http://127.0.0.1:8000/api/token/", {
+    let response = await fetch(`${API_BASE_URL}token/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +53,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("authTokens", JSON.stringify(data));
 
       // 👇 pedir el perfil del usuario
-      let profileRes = await fetch("http://127.0.0.1:8000/api/user/me/", {
+      let profileRes = await fetch(`${API_BASE_URL}user/me/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +84,7 @@ export const AuthProvider = ({ children }) => {
 
   let updateToken = async () => {
     console.log("Updating token...");
-    let response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+    let response = await fetch(`${API_BASE_URL}token/refresh/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
