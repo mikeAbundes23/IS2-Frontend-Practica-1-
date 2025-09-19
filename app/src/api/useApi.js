@@ -6,10 +6,13 @@ import axios from "axios";
 export const useApi = () => {
   const { authTokens } = useContext(AuthContext);
 
+  // Obtener la URL base desde las variables de entorno
+  const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api/";
+
   // Aquí creamos una instancia de axios con los headers de autenticación
   // para las peticiones que requieren autenticación.
   const apiAuth = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/",
+    baseURL: baseURL,
     headers: {
       Authorization: `Bearer ${authTokens?.access}`,
     },
@@ -18,7 +21,7 @@ export const useApi = () => {
   // No necesitamos los headers de autenticación para crear usuarios
   // porque la creación de usuarios no requiere autenticación.
   const api = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/",
+    baseURL: baseURL,
   });
 
   return {
