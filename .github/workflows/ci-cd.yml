@@ -24,13 +24,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-        cd app
-        npm install
+          cd app
+          npm install
 
       - name: Run tests
         run: |
-        cd app
-        npm test --if-present
+          cd app
+          npm test --if-present
 
   # ==============================
   # Job de build y push de imagen Docker
