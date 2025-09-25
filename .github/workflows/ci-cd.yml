@@ -53,7 +53,7 @@ jobs:
       - name: Build Docker image
         run: |
           # Construir la imagen con etiqueta única (SHA del commit)
-          docker build -t ghcr.io/mikeabundes23/is2-frontend-practica-1:${{ github.sha }} .
+          docker build -t ghcr.io/mikeabundes23/is2-frontend-practica-1:${{ github.sha }} ./app
 
       - name: Push Docker image
         run: |
