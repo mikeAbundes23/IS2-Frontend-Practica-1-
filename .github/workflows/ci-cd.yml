@@ -23,10 +23,14 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: npm install
+        run: |
+        cd app
+        npm install
 
       - name: Run tests
-        run: npm test --if-present
+        run: |
+        cd app
+        npm test --if-present
 
   # ==============================
   # Job de build y push de imagen Docker
